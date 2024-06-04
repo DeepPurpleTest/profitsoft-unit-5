@@ -1,0 +1,8 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: profitsoft-unit-5
+  kafka:
+    bootstrap-servers: localhost:9092
