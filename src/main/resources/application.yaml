@@ -6,3 +6,15 @@ spring:
     name: profitsoft-unit-5
   kafka:
     bootstrap-servers: localhost:9092
+
+  mail:
+    host: 'smtp.gmail.com'
+    port: 587
+    username: 'maks.viskovatov@gmail.com'
+    password: 'lsxgufnoazrhtvto'
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
