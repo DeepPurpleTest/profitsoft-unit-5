@@ -23,5 +23,9 @@ public class TaskMail {
 
 	private String assigneeEmail;
 
-	private String receiverEmail;
+	private String reporterEmail;
+
+	private MailStatus status;
+
+	private String errorMessage;
 }

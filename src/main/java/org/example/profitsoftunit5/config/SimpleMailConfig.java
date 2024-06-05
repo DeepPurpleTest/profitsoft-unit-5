@@ -8,10 +8,10 @@ import org.springframework.mail.SimpleMailMessage;
 public class SimpleMailConfig {
 
 	@Bean
-	public SimpleMailMessage templateSimpleMessage() {
+	public SimpleMailMessage receiverTemplateMessage() {
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setText(
-				"This is the test email template for your email:\n%s\n");
+				"You set as %s on task: %s \n description: %s");
 		return message;
 	}
 }

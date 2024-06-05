@@ -3,9 +3,13 @@ package org.example.profitsoftunit5.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.profitsoftunit5.model.event.TaskCreateEvent;
+import org.example.profitsoftunit5.model.model.MailStatus;
 import org.example.profitsoftunit5.model.model.TaskMail;
 import org.example.profitsoftunit5.repository.TaskMailRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Set;
 
 @Slf4j
 @Service
@@ -14,20 +18,27 @@ public class TaskMailService {
 
 	private final TaskMailRepository taskMailRepository;
 
-	public void saveTaskMail(TaskCreateEvent taskCreateEvent) {
-		TaskMail taskMail = mapToEntity(taskCreateEvent);
-
-		TaskMail savedTaskMail = taskMailRepository.save(taskMail);
-		log.info("Save task mail");
-		log.info("Task: {}", savedTaskMail);
+	public void saveTaskMail(TaskMail taskMail) {
+		TaskMail saved = taskMailRepository.save(taskMail);
+		log.info("TaskMail: {}", saved);
 	}
 
-	private TaskMail mapToEntity(TaskCreateEvent taskCreateEvent) {
+	public TaskMail mapToEntity(TaskCreateEvent taskCreateEvent) {
 		return TaskMail.builder()
 				.taskName(taskCreateEvent.getTaskName())
 				.taskDescription(taskCreateEvent.getTaskDescription())
 				.assigneeEmail(taskCreateEvent.getAssigneeEmail())
-				.receiverEmail(taskCreateEvent.getReceiverEmail())
+				.reporterEmail(taskCreateEvent.getReporterEmail())
+				.status(MailStatus.PENDING)
+//				.createdAt(taskCreateEvent.getCreatedAt())
 				.build();
+	}
+
+	public List<TaskMail> getTasksNeedToSend() {
+		return taskMailRepository.findAllNeedToSend();
+	}
+
+	public void saveAll(Set<TaskMail> taskMails) {
+		taskMailRepository.saveAll(taskMails);
 	}
 }

@@ -17,5 +17,5 @@ public class TaskCreateEvent {
 
 	private String assigneeEmail;
 
-	private String receiverEmail;
+	private String reporterEmail;
 }
