@@ -26,9 +26,8 @@ public class TaskMailService {
 	public TaskMail mapToEntity(TaskCreateEvent taskCreateEvent) {
 		return TaskMail.builder()
 				.taskName(taskCreateEvent.getTaskName())
-				.taskDescription(taskCreateEvent.getTaskDescription())
+				.reporterName(taskCreateEvent.getReporterName())
 				.assigneeEmail(taskCreateEvent.getAssigneeEmail())
-				.reporterEmail(taskCreateEvent.getReporterEmail())
 				.status(MailStatus.PENDING)
 //				.createdAt(taskCreateEvent.getCreatedAt())
 				.build();

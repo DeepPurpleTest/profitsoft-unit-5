@@ -19,11 +19,9 @@ public class TaskMail {
 
 	private String taskName;
 
-	private String taskDescription;
+	private String reporterName;
 
 	private String assigneeEmail;
-
-	private String reporterEmail;
 
 	private MailStatus status;
 

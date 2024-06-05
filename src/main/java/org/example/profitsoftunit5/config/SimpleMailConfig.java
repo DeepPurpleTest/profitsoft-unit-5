@@ -7,11 +7,12 @@ import org.springframework.mail.SimpleMailMessage;
 @Configuration
 public class SimpleMailConfig {
 
+	// create map with templates?
 	@Bean
-	public SimpleMailMessage receiverTemplateMessage() {
+	public SimpleMailMessage assigneeTemplateMessage() {
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setText(
-				"You set as %s on task: %s \n description: %s");
+				"[Profitsoft-unit-2] %s assigned %s to you");
 		return message;
 	}
 }
