@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.profitsoftunit5.model.event.Receiver;
+import org.example.profitsoftunit5.model.event.Task;
 import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
@@ -23,9 +24,8 @@ public class TaskMail {
 	@Id
 	private String id;
 
-	private String projectName;
-
-	private String taskName;
+	@Field(type = FieldType.Object)
+	private Task task;
 
 	@Field(type = FieldType.Object)
 	private Receiver receiver;

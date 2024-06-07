@@ -2,8 +2,6 @@ package org.example.profitsoftunit5.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.profitsoftunit5.model.event.TaskCreateEvent;
-import org.example.profitsoftunit5.model.model.MailStatus;
 import org.example.profitsoftunit5.model.model.TaskMail;
 import org.example.profitsoftunit5.repository.TaskMailRepository;
 import org.springframework.stereotype.Service;

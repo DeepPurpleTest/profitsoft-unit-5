@@ -1,6 +1,7 @@
 package org.example.profitsoftunit5.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.profitsoftunit5.model.model.MailStatus;
 import org.example.profitsoftunit5.model.model.MailType;
 import org.example.profitsoftunit5.model.model.TaskMail;
@@ -14,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class MailService {
@@ -34,11 +36,13 @@ public class MailService {
 	}
 
 	private SimpleMailMessage createMessage(TaskMail taskMail) {
-		if (taskMail.getType().equals(MailType.ASSIGNEE_NOTIFICATION)) {
-			return templates.get(MailType.ASSIGNEE_NOTIFICATION).createMessage(taskMail);
-		} else {
-			return templates.get(MailType.REPORTER_NOTIFICATION).createMessage(taskMail);
+		MessageTemplate template = templates.get(taskMail.getType());
+		if (template == null) {
+			log.error("Template is not found for type: {}",  taskMail.getType());
+			return new SimpleMailMessage();
 		}
+
+		return templates.get(taskMail.getType()).createMessage(taskMail);
 	}
 
 	private void sendMessagesForTask(TaskMail task, SimpleMailMessage message) {

@@ -2,7 +2,6 @@ package org.example.profitsoftunit5.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.profitsoftunit5.model.event.Receiver;
 import org.example.profitsoftunit5.model.event.TaskCreateEvent;
 import org.example.profitsoftunit5.model.model.MailStatus;
 import org.example.profitsoftunit5.model.model.MailType;
@@ -37,8 +36,7 @@ public class TaskEventConsumer {
 
 	private TaskMail createMail(TaskCreateEvent event, MailType type) {
 		return TaskMail.builder()
-				.taskName(event.getTaskName())
-				.projectName(event.getProjectName())
+				.task(event.getTask())
 				.receiver(event.getReceiver())
 				.status(MailStatus.PENDING)
 				.createdAt(event.getCreatedAt())

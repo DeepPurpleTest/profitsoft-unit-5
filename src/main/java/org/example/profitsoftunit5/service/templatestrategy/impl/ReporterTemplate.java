@@ -18,13 +18,20 @@ public class ReporterTemplate implements MessageTemplate {
 	public SimpleMailMessage createMessage(TaskMail taskMail) {
 		SimpleMailMessage message = new SimpleMailMessage();
 
-		String template = "[%s] Task '%s' has been reported by you";
+		String subjectTemplate = "[%s] Task '%s' has been reported by you";
+		String subject = String.format(
+				subjectTemplate,
+				taskMail.getTask().getProjectName(),
+				taskMail.getTask().getTaskName());
+
+		String textTemplate = "You`re now reporter on task %s %s";
 		String text = String.format(
-				template,
-				taskMail.getProjectName(),
-				taskMail.getTaskName());
+				textTemplate,
+				taskMail.getTask().getTaskName(),
+				taskMail.getTask().getTaskDescription());
 
 		message.setTo(taskMail.getReceiver().getEmail());
+		message.setSubject(subject);
 		message.setText(text);
 
 		return message;

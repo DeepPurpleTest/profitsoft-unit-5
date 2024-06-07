@@ -5,17 +5,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class TaskCreateEvent {
+public class Task {
 
-	private Task task;
+	String projectName;
 
-	private Receiver receiver;
+	String taskName;
 
-	private LocalDateTime createdAt;
+	String taskDescription;
 }
