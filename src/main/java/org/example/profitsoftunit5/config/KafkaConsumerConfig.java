@@ -23,11 +23,11 @@ public class KafkaConsumerConfig {
 	private String bootstrapAddress;
 
 	@Bean
-	public ConsumerFactory<String, TaskCreateEvent> taskConsumerFactory() {
+	public ConsumerFactory<String, TaskCreateEvent> mailConsumerFactory() {
 		Map<String, Object> props = new HashMap<>();
 
 		props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
-		props.put(ConsumerConfig.GROUP_ID_CONFIG, "profitsoft-unit-2");
+		props.put(ConsumerConfig.GROUP_ID_CONFIG, "profitsoft-unit-5");
 		props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
 		props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
 
@@ -38,10 +38,10 @@ public class KafkaConsumerConfig {
 	}
 
 	@Bean
-	public ConcurrentKafkaListenerContainerFactory<String, TaskCreateEvent> taskKafkaListenerContainerFactory() {
+	public ConcurrentKafkaListenerContainerFactory<String, TaskCreateEvent> mailKafkaListenerContainerFactory() {
 
 		ConcurrentKafkaListenerContainerFactory<String, TaskCreateEvent> factory = new ConcurrentKafkaListenerContainerFactory<>();
-		factory.setConsumerFactory(taskConsumerFactory());
+		factory.setConsumerFactory(mailConsumerFactory());
 		return factory;
 	}
 }

@@ -18,7 +18,7 @@ public class TaskEventConsumer {
 
 	@KafkaListener(
 			topics = "assignee-mails",
-			containerFactory = "taskKafkaListenerContainerFactory")
+			containerFactory = "mailKafkaListenerContainerFactory")
 	public void listenAssigneeMails(TaskCreateEvent event) {
 		log.info("Received assignee mail event: " + event);
 
@@ -27,7 +27,7 @@ public class TaskEventConsumer {
 
 	@KafkaListener(
 			topics = "reporter-mails",
-			containerFactory = "taskKafkaListenerContainerFactory")
+			containerFactory = "mailKafkaListenerContainerFactory")
 	public void listenReporterMails(TaskCreateEvent event) {
 		log.info("Received reporter mail event: " + event);
 
