@@ -1,18 +1,22 @@
 package org.example.profitsoftunit5.config;
 
+import org.example.profitsoftunit5.model.model.MailType;
+import org.example.profitsoftunit5.service.templatestrategy.MessageTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.mail.SimpleMailMessage;
+
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Configuration
 public class SimpleMailConfig {
 
-	// create map with templates?
 	@Bean
-	public SimpleMailMessage assigneeTemplateMessage() {
-		SimpleMailMessage message = new SimpleMailMessage();
-		message.setText(
-				"[Profitsoft-unit-2] %s assigned %s to you");
-		return message;
+	public Map<MailType, MessageTemplate> mailTemplates(List<MessageTemplate> messageTemplates) {
+		return messageTemplates.stream().collect(Collectors.toMap(
+				MessageTemplate::getType,
+				v -> v
+		));
 	}
 }

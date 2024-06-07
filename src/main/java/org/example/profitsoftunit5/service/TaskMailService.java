@@ -23,16 +23,6 @@ public class TaskMailService {
 		log.info("TaskMail: {}", saved);
 	}
 
-	public TaskMail mapToEntity(TaskCreateEvent taskCreateEvent) {
-		return TaskMail.builder()
-				.taskName(taskCreateEvent.getTaskName())
-				.reporterName(taskCreateEvent.getReporterName())
-				.assigneeEmail(taskCreateEvent.getAssigneeEmail())
-				.status(MailStatus.PENDING)
-//				.createdAt(taskCreateEvent.getCreatedAt())
-				.build();
-	}
-
 	public List<TaskMail> getTasksNeedToSend() {
 		return taskMailRepository.findAllNeedToSend();
 	}
