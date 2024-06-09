@@ -8,6 +8,7 @@ import org.example.profitsoftunit5.model.model.TaskMail;
 import org.example.profitsoftunit5.service.templatestrategy.MessageTemplate;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -24,7 +25,9 @@ public class MailService {
 	private final Map<MailType, MessageTemplate> templates;
 	private final TaskMailService taskMailService;
 
+	@Scheduled(fixedDelayString = "${mails.delay}")
 	public void sendMessages() {
+		log.info("Send messages -> start!");
 		List<TaskMail> createdTasks = taskMailService.getTasksNeedToSend();
 		Map<TaskMail, SimpleMailMessage> messages = new HashMap<>();
 
@@ -49,7 +52,7 @@ public class MailService {
 		try {
 			mailSender.send(message);
 			task.setStatus(MailStatus.SENT);
-		} catch (Exception e) {
+		} catch (RuntimeException e) {
 			task.setStatus(MailStatus.FAILED);
 			task.setErrorMessage(e.getClass().getName() + ": " + e.getMessage());
 		}

@@ -21,3 +21,6 @@ spring:
 
   elasticsearch:
     uris: http://${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}
+
+mails:
+  delay: "300000"
