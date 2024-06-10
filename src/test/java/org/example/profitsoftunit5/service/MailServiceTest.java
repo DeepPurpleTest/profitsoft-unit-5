@@ -1,22 +1,23 @@
 package org.example.profitsoftunit5.service;
 
+import org.example.profitsoftunit5.ProfitsoftUnit5Application;
 import org.example.profitsoftunit5.model.event.Receiver;
 import org.example.profitsoftunit5.model.event.Task;
 import org.example.profitsoftunit5.model.model.MailStatus;
 import org.example.profitsoftunit5.model.model.MailType;
 import org.example.profitsoftunit5.model.model.TaskMail;
 import org.example.profitsoftunit5.repository.TaskMailRepository;
-import org.example.profitsoftunit5.testcontainers.BaseContainerTest;
+import org.example.profitsoftunit5.testcontainers.TestElasticConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.test.context.ContextConfiguration;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -28,8 +29,8 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@AutoConfigureMockMvc
-class MailServiceTest extends BaseContainerTest {
+@ContextConfiguration(classes = {ProfitsoftUnit5Application.class, TestElasticConfig.class})
+class MailServiceTest {
 
 	@MockBean
 	private JavaMailSender javaMailSender;
@@ -62,7 +63,7 @@ class MailServiceTest extends BaseContainerTest {
 				.type(MailType.ASSIGNEE_NOTIFICATION)
 				.errorMessage(null)
 				.attempts(0)
-				.createdAt(LocalDateTime.now())
+				.createdAt(Instant.now())
 				.lastTry(null)
 				.build();
 

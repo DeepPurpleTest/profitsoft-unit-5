@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface TaskMailRepository extends ElasticsearchRepository<TaskMail, String> {
 
-	@Query("{\"bool\": {\"should\": [{\"term\": {\"status.keyword\": \"ERROR\"}}, {\"term\": {\"status.keyword\": \"PENDING\"}}]}}")
+	@Query("{\"bool\": {\"should\": [{\"term\": {\"status.keyword\": \"FAILED\"}}, {\"term\": {\"status.keyword\": \"PENDING\"}}]}}")
 	List<TaskMail> findAllNeedToSend();
 }

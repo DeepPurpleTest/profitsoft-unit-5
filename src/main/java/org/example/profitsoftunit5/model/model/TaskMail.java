@@ -12,7 +12,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 @Data
 @Document(indexName = "task-mail-index")
@@ -39,8 +39,8 @@ public class TaskMail {
 	private int attempts;
 
 	@Field(type = FieldType.Date, format = DateFormat.date_hour_minute_second)
-	private LocalDateTime createdAt;
+	private Instant createdAt;
 
 	@Field(type = FieldType.Date, format = DateFormat.date_hour_minute_second)
-	private LocalDateTime lastTry;
+	private Instant lastTry;
 }
