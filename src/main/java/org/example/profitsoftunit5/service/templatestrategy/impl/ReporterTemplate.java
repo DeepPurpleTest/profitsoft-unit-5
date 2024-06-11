@@ -1,6 +1,6 @@
 package org.example.profitsoftunit5.service.templatestrategy.impl;
 
-import org.example.profitsoftunit5.model.model.MailType;
+import org.example.profitsoftunit5.model.event.NotificationType;
 import org.example.profitsoftunit5.model.model.TaskMail;
 import org.example.profitsoftunit5.service.templatestrategy.MessageTemplate;
 import org.springframework.mail.SimpleMailMessage;
@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 public class ReporterTemplate implements MessageTemplate {
 
 	@Override
-	public MailType getType() {
-		return MailType.REPORTER_NOTIFICATION;
+	public NotificationType getType() {
+		return NotificationType.REPORTER_NOTIFICATION;
 	}
 
 	@Override

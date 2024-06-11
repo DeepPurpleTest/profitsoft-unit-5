@@ -1,6 +1,6 @@
 package org.example.profitsoftunit5.config;
 
-import org.example.profitsoftunit5.model.model.MailType;
+import org.example.profitsoftunit5.model.event.NotificationType;
 import org.example.profitsoftunit5.service.templatestrategy.MessageTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class SimpleMailConfig {
 
 	@Bean
-	public Map<MailType, MessageTemplate> mailTemplates(List<MessageTemplate> messageTemplates) {
+	public Map<NotificationType, MessageTemplate> mailTemplates(List<MessageTemplate> messageTemplates) {
 		return messageTemplates.stream().collect(Collectors.toMap(
 				MessageTemplate::getType,
 				v -> v

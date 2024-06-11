@@ -4,7 +4,7 @@ import org.example.profitsoftunit5.ProfitsoftUnit5Application;
 import org.example.profitsoftunit5.model.event.Receiver;
 import org.example.profitsoftunit5.model.event.Task;
 import org.example.profitsoftunit5.model.model.MailStatus;
-import org.example.profitsoftunit5.model.model.MailType;
+import org.example.profitsoftunit5.model.event.NotificationType;
 import org.example.profitsoftunit5.model.model.TaskMail;
 import org.example.profitsoftunit5.repository.TaskMailRepository;
 import org.example.profitsoftunit5.testcontainers.TestElasticConfig;
@@ -60,7 +60,7 @@ class MailServiceTest {
 						.name("Moksem")
 						.build())
 				.status(MailStatus.PENDING)
-				.type(MailType.ASSIGNEE_NOTIFICATION)
+				.notificationType(NotificationType.ASSIGNEE_NOTIFICATION)
 				.errorMessage(null)
 				.attempts(0)
 				.createdAt(Instant.now())

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.profitsoftunit5.model.event.NotificationType;
 import org.example.profitsoftunit5.model.event.Receiver;
 import org.example.profitsoftunit5.model.event.Task;
 import org.springframework.data.elasticsearch.annotations.DateFormat;
@@ -32,7 +33,7 @@ public class TaskMail {
 
 	private MailStatus status;
 
-	private MailType type;
+	private NotificationType notificationType;
 
 	private String errorMessage;
 

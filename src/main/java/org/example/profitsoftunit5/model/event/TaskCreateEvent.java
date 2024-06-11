@@ -18,4 +18,6 @@ public class TaskCreateEvent {
 	private Receiver receiver;
 
 	private Instant createdAt;
+
+	private NotificationType notificationType;
 }

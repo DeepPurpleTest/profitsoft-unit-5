@@ -3,7 +3,7 @@ package org.example.profitsoftunit5.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.profitsoftunit5.model.model.MailStatus;
-import org.example.profitsoftunit5.model.model.MailType;
+import org.example.profitsoftunit5.model.event.NotificationType;
 import org.example.profitsoftunit5.model.model.TaskMail;
 import org.example.profitsoftunit5.service.templatestrategy.MessageTemplate;
 import org.springframework.mail.SimpleMailMessage;
@@ -22,7 +22,7 @@ import java.util.Map;
 public class MailService {
 
 	private final JavaMailSender mailSender;
-	private final Map<MailType, MessageTemplate> templates;
+	private final Map<NotificationType, MessageTemplate> templates;
 	private final TaskMailService taskMailService;
 
 	@Scheduled(fixedDelayString = "${mails.delay}")
@@ -39,13 +39,13 @@ public class MailService {
 	}
 
 	private SimpleMailMessage createMessage(TaskMail taskMail) {
-		MessageTemplate template = templates.get(taskMail.getType());
+		MessageTemplate template = templates.get(taskMail.getNotificationType());
 		if (template == null) {
-			log.error("Template is not found for type: {}",  taskMail.getType());
+			log.error("Template is not found for type: {}",  taskMail.getNotificationType());
 			return new SimpleMailMessage();
 		}
 
-		return templates.get(taskMail.getType()).createMessage(taskMail);
+		return templates.get(taskMail.getNotificationType()).createMessage(taskMail);
 	}
 
 	private void sendMessagesForTask(TaskMail task, SimpleMailMessage message) {
