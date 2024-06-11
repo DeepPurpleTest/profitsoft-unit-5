@@ -20,25 +20,13 @@ public class TaskEventConsumer {
 	private final TaskMailService taskMailService;
 
 	/**
-	 * Listens for task creation events intended for assignees.
+	 * Listens for task creation events
 	 */
 	@KafkaListener(
-			topics = "assignee-mails",
+			topics = "task-mails",
 			containerFactory = "taskCreateKafkaListenerContainerFactory")
 	public void listenAssigneeMails(TaskCreateEvent event) {
-		log.info("Received assignee mail event: " + event);
-
-		taskMailService.saveTaskMail(createMail(event));
-	}
-
-	/**
-	 * Listens for task creation events intended for reporters.
-	 */
-	@KafkaListener(
-			topics = "reporter-mails",
-			containerFactory = "taskCreateKafkaListenerContainerFactory")
-	public void listenReporterMails(TaskCreateEvent event) {
-		log.info("Received reporter mail event: " + event);
+		log.info("Received task mail event: " + event);
 
 		taskMailService.saveTaskMail(createMail(event));
 	}
