@@ -7,7 +7,7 @@
 4. In the .env file add values to the keys
 
    MAIL_USERNAME= email </br>
-   MAIL_PASSWORD= generated application password
+   MAIL_PASSWORD= generated application password (clear all spaces in generated password)
 
 ## To run the application, execute the command
 ```text
@@ -45,3 +45,5 @@ Then when creating a task specify it as reporter or assignee (can have both, the
    ```
 
 After that within 5 minutes if the email is valid and smtp server is available, messages will be sent to the email.
+You can see the status of the messages in the kibana http://localhost:5601
+And status of event in kafka-ui http://localhost:8082
