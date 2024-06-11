@@ -44,6 +44,6 @@ Then when creating a task specify it as reporter or assignee (can have both, the
    }
    ```
 
-After that within 5 minutes if the email is valid and smtp server is available, messages will be sent to the email.
-You can see the status of the messages in the kibana http://localhost:5601
+After that within 5 minutes if the email is valid and smtp server is available, messages will be sent to the email. </br>
+You can see the status of the messages in the kibana http://localhost:5601 </br>
 And status of event in kafka-ui http://localhost:8082
