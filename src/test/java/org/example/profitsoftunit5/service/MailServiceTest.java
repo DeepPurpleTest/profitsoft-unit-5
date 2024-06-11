@@ -7,6 +7,8 @@ import org.example.profitsoftunit5.model.model.MailStatus;
 import org.example.profitsoftunit5.model.event.NotificationType;
 import org.example.profitsoftunit5.model.model.TaskMail;
 import org.example.profitsoftunit5.repository.TaskMailRepository;
+import org.example.profitsoftunit5.service.impl.MailServiceImpl;
+import org.example.profitsoftunit5.consumer.TaskEventConsumer;
 import org.example.profitsoftunit5.testcontainers.TestElasticConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -42,7 +44,7 @@ class MailServiceTest {
 	private TaskMailRepository taskMailRepository;
 
 	@Autowired
-	private MailService mailService;
+	private MailServiceImpl mailService;
 
 	@BeforeEach
 	void setUp() {

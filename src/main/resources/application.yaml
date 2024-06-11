@@ -20,4 +20,4 @@ spring:
             enable: true
 
 mails:
-  delay: "300000"
+  delay: 5

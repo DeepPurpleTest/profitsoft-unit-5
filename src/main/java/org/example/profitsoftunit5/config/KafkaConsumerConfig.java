@@ -23,7 +23,7 @@ public class KafkaConsumerConfig {
 	private String bootstrapAddress;
 
 	@Bean
-	public ConsumerFactory<String, TaskCreateEvent> mailConsumerFactory() {
+	public ConsumerFactory<String, TaskCreateEvent> taskCreateConsumerFactory() {
 		Map<String, Object> props = new HashMap<>();
 
 		props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
@@ -38,10 +38,10 @@ public class KafkaConsumerConfig {
 	}
 
 	@Bean
-	public ConcurrentKafkaListenerContainerFactory<String, TaskCreateEvent> mailKafkaListenerContainerFactory() {
+	public ConcurrentKafkaListenerContainerFactory<String, TaskCreateEvent> taskCreateKafkaListenerContainerFactory() {
 
 		ConcurrentKafkaListenerContainerFactory<String, TaskCreateEvent> factory = new ConcurrentKafkaListenerContainerFactory<>();
-		factory.setConsumerFactory(mailConsumerFactory());
+		factory.setConsumerFactory(taskCreateConsumerFactory());
 		return factory;
 	}
 }

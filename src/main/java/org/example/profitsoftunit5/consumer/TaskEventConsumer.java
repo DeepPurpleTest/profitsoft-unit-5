@@ -1,10 +1,11 @@
-package org.example.profitsoftunit5.service;
+package org.example.profitsoftunit5.consumer;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.profitsoftunit5.model.event.TaskCreateEvent;
 import org.example.profitsoftunit5.model.model.MailStatus;
 import org.example.profitsoftunit5.model.model.TaskMail;
+import org.example.profitsoftunit5.service.impl.TaskMailServiceImpl;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +14,11 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class TaskEventConsumer {
 
-	private final TaskMailService taskMailService;
+	private final TaskMailServiceImpl taskMailService;
 
 	@KafkaListener(
 			topics = "assignee-mails",
-			containerFactory = "mailKafkaListenerContainerFactory")
+			containerFactory = "taskCreateKafkaListenerContainerFactory")
 	public void listenAssigneeMails(TaskCreateEvent event) {
 		log.info("Received assignee mail event: " + event);
 
@@ -26,7 +27,7 @@ public class TaskEventConsumer {
 
 	@KafkaListener(
 			topics = "reporter-mails",
-			containerFactory = "mailKafkaListenerContainerFactory")
+			containerFactory = "taskCreateKafkaListenerContainerFactory")
 	public void listenReporterMails(TaskCreateEvent event) {
 		log.info("Received reporter mail event: " + event);
 

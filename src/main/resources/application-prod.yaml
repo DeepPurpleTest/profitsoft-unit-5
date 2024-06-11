@@ -23,4 +23,4 @@ spring:
     uris: http://${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}
 
 mails:
-  delay: "300000"
+  delay: 5
