@@ -40,7 +40,9 @@ public class MailServiceImpl implements MailService {
 
 		tasksToSend.forEach(task -> messages.put(task, createMessage(task)));
 
-		messages.forEach(this::sendMessagesForTask);
+		messages.entrySet().stream()
+				.filter(entry -> entry.getValue() != null)
+				.forEach(entry -> sendMessagesForTask(entry.getKey(), entry.getValue()));
 
 		taskMailService.saveAll(messages.keySet());
 	}
@@ -52,7 +54,7 @@ public class MailServiceImpl implements MailService {
 		MessageTemplate template = templates.get(taskMail.getNotificationType());
 		if (template == null) {
 			log.error("Template is not found for type: {}", taskMail.getNotificationType());
-			return new SimpleMailMessage();
+			return null;
 		}
 
 		return template.createMessage(taskMail);

@@ -10,6 +10,7 @@ import org.example.profitsoftunit5.repository.TaskMailRepository;
 import org.example.profitsoftunit5.service.impl.MailServiceImpl;
 import org.example.profitsoftunit5.consumer.TaskEventConsumer;
 import org.example.profitsoftunit5.testcontainers.TestElasticConfig;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,8 +49,6 @@ class MailServiceTest {
 
 	@BeforeEach
 	void setUp() {
-		taskMailRepository.deleteAll();
-
 		TaskMail taskMail = TaskMail.builder()
 				.id("1")
 				.task(Task.builder()
@@ -70,6 +69,11 @@ class MailServiceTest {
 				.build();
 
 		taskMailRepository.save(taskMail);
+	}
+
+	@AfterEach
+	void clear() {
+		taskMailRepository.deleteAll();
 	}
 
 	@Test
