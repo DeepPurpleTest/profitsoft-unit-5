@@ -15,6 +15,9 @@ import org.springframework.kafka.support.serializer.JsonDeserializer;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Configuration class for Kafka consumers.
+ */
 @EnableKafka
 @Configuration
 public class KafkaConsumerConfig {
@@ -22,6 +25,11 @@ public class KafkaConsumerConfig {
 	@Value(value = "${spring.kafka.bootstrap-servers}")
 	private String bootstrapAddress;
 
+	/**
+	 * Creates a {@link ConsumerFactory} for {@link TaskCreateEvent} messages.
+	 *
+	 * @return the consumer factory for {@link TaskCreateEvent}
+	 */
 	@Bean
 	public ConsumerFactory<String, TaskCreateEvent> taskCreateConsumerFactory() {
 		Map<String, Object> props = new HashMap<>();
@@ -37,6 +45,11 @@ public class KafkaConsumerConfig {
 				new JsonDeserializer<>(TaskCreateEvent.class));
 	}
 
+	/**
+	 * Creates a {@link ConcurrentKafkaListenerContainerFactory} for {@link TaskCreateEvent} messages.
+	 *
+	 * @return the Kafka listener container factory for {@link TaskCreateEvent}
+	 */
 	@Bean
 	public ConcurrentKafkaListenerContainerFactory<String, TaskCreateEvent> taskCreateKafkaListenerContainerFactory() {
 

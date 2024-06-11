@@ -6,6 +6,7 @@ import org.example.profitsoftunit5.model.event.NotificationType;
 import org.example.profitsoftunit5.model.model.MailStatus;
 import org.example.profitsoftunit5.model.model.TaskMail;
 import org.example.profitsoftunit5.service.MailService;
+import org.example.profitsoftunit5.service.TaskMailService;
 import org.example.profitsoftunit5.service.templatestrategy.MessageTemplate;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -25,8 +26,11 @@ public class MailServiceImpl implements MailService {
 
 	private final JavaMailSender mailSender;
 	private final Map<NotificationType, MessageTemplate> templates;
-	private final TaskMailServiceImpl taskMailService;
+	private final TaskMailService taskMailService;
 
+	/**
+	 * Scheduled method to send emails at fixed delay intervals.
+	 */
 	@Override
 	@Scheduled(fixedDelayString = "${mails.delay}", timeUnit = TimeUnit.MINUTES)
 	public void sendMessages() {
@@ -41,16 +45,23 @@ public class MailServiceImpl implements MailService {
 		taskMailService.saveAll(messages.keySet());
 	}
 
+	/**
+	 * Method for create messages by templates map with notification types
+	 */
 	private SimpleMailMessage createMessage(TaskMail taskMail) {
 		MessageTemplate template = templates.get(taskMail.getNotificationType());
 		if (template == null) {
-			log.error("Template is not found for type: {}",  taskMail.getNotificationType());
+			log.error("Template is not found for type: {}", taskMail.getNotificationType());
 			return new SimpleMailMessage();
 		}
 
 		return template.createMessage(taskMail);
 	}
 
+	/**
+	 * Send messages on email if successfully increase attempts, setLastTry time and change status on SENT
+	 * if unsuccessfully successfully increase attempts, setLastTry time, set error message and change status on FAILED
+	 */
 	private void sendMessagesForTask(TaskMail task, SimpleMailMessage message) {
 		try {
 			mailSender.send(message);

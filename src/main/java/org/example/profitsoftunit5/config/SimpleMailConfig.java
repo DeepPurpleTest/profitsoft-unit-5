@@ -12,6 +12,12 @@ import java.util.stream.Collectors;
 @Configuration
 public class SimpleMailConfig {
 
+	/**
+	 * Configures a map of {@link NotificationType} to {@link MessageTemplate}.
+	 *
+	 * @param messageTemplates the list of message templates to be used
+	 * @return a map where the key is the {@link NotificationType} and the value is the corresponding {@link MessageTemplate}
+	 */
 	@Bean
 	public Map<NotificationType, MessageTemplate> mailTemplates(List<MessageTemplate> messageTemplates) {
 		return messageTemplates.stream().collect(Collectors.toMap(

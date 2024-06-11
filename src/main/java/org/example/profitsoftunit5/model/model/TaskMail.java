@@ -15,6 +15,9 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.time.Instant;
 
+/**
+ * Entity for representing task mail information.
+ */
 @Data
 @Document(indexName = "task-mail-index")
 @Builder

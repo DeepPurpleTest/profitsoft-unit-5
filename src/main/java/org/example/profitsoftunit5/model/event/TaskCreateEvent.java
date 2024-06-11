@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 
+/**
+ * Class represents task create event with notification type
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

@@ -5,6 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Class represents receiver data
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
